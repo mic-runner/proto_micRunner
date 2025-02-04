@@ -30,6 +30,9 @@ jobs:
           npm ci && npm run build
           cp dist/index.html dist/404.html
 
+      - name: List dist contents
+        run: ls -R dist
+
       - name: Update pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
