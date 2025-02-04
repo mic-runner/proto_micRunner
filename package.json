@@ -21,6 +21,7 @@
   },
   "homepage": "https://radmuffin.github.io/proto_micRunner",
   "dependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
     "express": "^4.21.2",
     "peer": "^1.0.2",
     "peerjs": "^1.5.4",
