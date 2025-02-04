@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/radmuffin/proto_micRunner/issues"
   },
-  "homepage": "https://github.com/radmuffin/proto_micRunner#readme",
+  "homepage": "https://radmuffin.github.io/proto_micRunner",
   "dependencies": {
     "express": "^4.21.2",
     "peer": "^1.0.2",
