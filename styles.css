@@ -1,0 +1,30 @@
+html, body {
+        height: 100%;
+        margin: 10px; /* Add margin */
+        padding: 10px; /* Add padding */
+        display: flex;
+        flex-direction: column;
+    }
+
+    #root {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin: 10px; /* Add margin */
+        padding: 10px; /* Add padding */
+    }
+
+    input[type="text"] {
+        width: 100%; /* Make text fields take full width */
+        margin: 10px; /* Add margin */
+        padding: 10px; /* Add padding */
+    }
+
+    textarea {
+        width: 100%;
+        height: 100px;
+        resize: none;
+        margin: 10px; /* Add margin */
+        padding: 10px; /* Add padding */
+    }
