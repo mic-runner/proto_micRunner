@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import Peer, { DataConnection } from "peerjs";
 import './styles.css';
@@ -57,7 +57,7 @@ peer.on('connection', (conn: DataConnection) => {
 });
 
 function App() {
-    const [message, setMessage] = useState('');
+    // const [message, setMessage] = useState('');
 
     useEffect(() => {
         const connectButton = document.getElementById('connect-button');
@@ -96,11 +96,13 @@ function App() {
         const sendBtn = document.getElementById('send-button');
         if (sendBtn) {
             sendBtn.addEventListener('click', () => {
+                const message = (document.getElementById('message') as HTMLInputElement).value;
                 for (const conns of Object.values(connections)) {
                     conns.forEach((c: DataConnection) => {
                         c.send(message);
                     });
                 }
+                (document.getElementById('message') as HTMLInputElement).value = '';
             });
         }
     }, []); // Empty dependency array to run only once
@@ -119,7 +121,7 @@ function App() {
             </div>
             <div>
                 <label htmlFor="message">Message:</label>
-                <input type="text" id="message" value={message} onChange={(e) => setMessage(e.target.value)} />
+                <input type="text" id="message"  />
                 <button id="send-button">Send</button>
             </div>
             <div>
