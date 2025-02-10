@@ -19,7 +19,8 @@ interface Connections {
 }
 
 const peer: Peer = new Peer({
-    config: iceConfig
+    config: iceConfig,
+    debug: 3    // Log debug info
 });
 
 let connections: Connections = {};
@@ -53,11 +54,25 @@ peer.on('connection', (conn: DataConnection) => {
 
     conn.on('error', (err) => {
         console.error('Connection error', err);
+        const log = document.getElementById('log');
+        log!.textContent += `Connection error: ${err}\n`;
     });
+
+    conn.on('open', () => {
+        const log = document.getElementById('log');
+        log!.textContent += `Connection opened with ${conn.peer}\n`;
+    });
+
+    conn.peerConnection.onicecandidate = (event) => {
+        if (event.candidate) {
+            console.log('New ICE candidate:', event.candidate);
+        } else {
+            console.log('ICE candidate gathering complete');
+        }
+    };
 });
 
 function App() {
-    // const [message, setMessage] = useState('');
 
     useEffect(() => {
         const connectButton = document.getElementById('connect-button');
@@ -71,6 +86,8 @@ function App() {
                         connections[connectId] = [];
                     }
                     connections[connectId].push(conn);
+                    const log = document.getElementById('log');
+                    log!.textContent += `Connected to ${connectId}\n`;
                 });
 
                 conn.on('data', (data) => {
@@ -94,18 +111,26 @@ function App() {
         }
 
         const sendBtn = document.getElementById('send-button');
+        const messageInput = document.getElementById('message') as HTMLInputElement;
+
         if (sendBtn) {
             sendBtn.addEventListener('click', () => {
-                const message = (document.getElementById('message') as HTMLInputElement).value;
+                const message = messageInput.value;
                 for (const conns of Object.values(connections)) {
                     conns.forEach((c: DataConnection) => {
                         c.send(message);
                     });
                 }
-                (document.getElementById('message') as HTMLInputElement).value = '';
+                messageInput.value = '';
+            });
+
+            messageInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    sendBtn.click();
+                }
             });
         }
-    }, []); // Empty dependency array to run only once
+    }, []);
 
     return (
         <>
