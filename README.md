@@ -12,6 +12,7 @@
 - [ ] make connectivity reliable!
 - [ ] explore logic for initializing connections with LAN/QRCodes...
   - would be a good other project if someone wants to tackle QR generation APIs
+- [ ] split index.tsx into presenter and view for better architecture? not huge priority for prototype but good practice
 - [ ] audio transmission
   - [ ] explore audio quality
   - [ ] feedback issues??????
