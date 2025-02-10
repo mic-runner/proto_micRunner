@@ -7,7 +7,7 @@ const iceConfig = {
     iceServers: [
         { urls: "stun:stun.l.google.com:19302" }, // Primary STUN
         {
-            urls: "turn:openrelay.metered.ca:80",   // Primary TURN
+            urls: "turn:openrelay.metered.ca:443",   // Primary TURN
             username: "openrelayproject",
             credential: "openrelayproject"
         }
