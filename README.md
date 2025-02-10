@@ -12,10 +12,12 @@
 - [ ] make connectivity reliable!
 - [ ] explore logic for initializing connections with LAN/QRCodes...
   - would be a good other project if someone wants to tackle QR generation APIs
-- [ ] split index.tsx into presenter and view for better architecture? not huge priority for prototype but good practice
+  - qrcode.react might be a good library, bonus points for not being an API
 - [ ] audio transmission
   - [ ] explore audio quality
   - [ ] feedback issues??????
+- [ ] split index.tsx into presenter and view for better architecture? not huge priority for prototype but good practice
+
 
 ### connectivity issue:
 - We'll need to reproduce and test failures
