@@ -10,6 +10,7 @@
 
 ### next steps:
 - [ ] make connectivity reliable!
+- [ ] custom id for connection instead of ugly generated one (on peer initialization)
 - [ ] explore logic for initializing connections with LAN/QRCodes...
   - would be a good other project if someone wants to tackle QR generation APIs
   - qrcode.react might be a good library, bonus points for not being an API
@@ -26,4 +27,5 @@
 - may need to try different STUN/TURN servers
   - [ ] more research possibly needed here
   - [ ] possibly need to implement a TURN server (hope not)
+  - it was a turn timeout for one failure
 - [ ] diagnosing failing connections is #1 priority
