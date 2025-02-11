@@ -10,6 +10,7 @@
 
 ### next steps:
 - [ ] make connectivity reliable!
+- [ ] custom id for connection instead of ugly generated one (on peer initialization)
 - [ ] explore logic for initializing connections with LAN/QRCodes...
   - would be a good other project if someone wants to tackle QR generation APIs
   - qrcode.react might be a good library, bonus points for not being an API
