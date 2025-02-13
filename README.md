@@ -6,10 +6,13 @@
 - [x] skeleton ui
 - [x] create a simple peer-to-peer connection
 - [x] text chat works
+- [x] custom peer id's
+- [ ] connectivity still not 100% (honestly no improvement yet)
 
 
 ### next steps:
 - [ ] make connectivity reliable!
+- that last commit (adding retries and...) made connectivity worse somehow... not sure if it was the multiple turn servers or something with the retries
 - [ ] custom id for connection instead of ugly generated one (on peer initialization)
 - [ ] explore logic for initializing connections with LAN/QRCodes...
   - would be a good other project if someone wants to tackle QR generation APIs
