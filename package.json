@@ -17,9 +17,9 @@
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/radmuffin/proto_micRunner/issues"
+    "url": "https://github.com/mic-runner/proto_micRunner/issues"
   },
-  "homepage": "https://radmuffin.github.io/proto_micRunner",
+  "homepage": "https://protomic.radmuffin.click",
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "express": "^4.21.2",
