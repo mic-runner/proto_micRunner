@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import Peer, { DataConnection } from "peerjs";
+import Peer, { DataConnection, MediaConnection } from "peerjs";
 import "./styles.css";
 
 const iceConfig = {
@@ -72,11 +72,27 @@ function setupPeer() {
       }
     };
   });
+
+  peer.on("call", (call: MediaConnection) => {
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then((stream) => {
+        call.answer(stream); // Answer the call with the audio stream
+        call.on("stream", (remoteStream) => {
+          const audio = document.createElement("audio");
+          audio.srcObject = remoteStream;
+          audio.play();
+        });
+      })
+      .catch((err) => {
+        console.error("Failed to get local stream", err);
+      });
+  });
 }
 
 setupPeer();
 
-function configPeerConnection(conn: DataConnection, connectId: string) {
+function configPeerConnectionToOther(conn: DataConnection, connectId: string) {
   conn.on("open", () => {
     if (!connections[connectId]) {
       connections[connectId] = [];
@@ -106,6 +122,7 @@ function configPeerConnection(conn: DataConnection, connectId: string) {
 }
 
 function App() {
+  let localStream: MediaStream | null = null;
   useEffect(() => {
     const connectButton = document.getElementById("connect-button");
     if (connectButton) {
@@ -115,7 +132,41 @@ function App() {
         ).value;
         const conn = peer.connect(connectId);
 
-        configPeerConnection(conn, connectId);
+        configPeerConnectionToOther(conn, connectId);
+      });
+    }
+
+    const startAudioButton = document.getElementById("start-audio-button");
+    if (startAudioButton) {
+      startAudioButton.addEventListener("click", () => {
+        const connectId = (
+          document.getElementById("connect-id") as HTMLInputElement
+        ).value;
+        navigator.mediaDevices
+          .getUserMedia({ audio: true })
+          .then((stream) => {
+            localStream = stream;
+            const call = peer.call(connectId, stream);
+            call.on("stream", (remoteStream) => {
+              const audio = document.createElement("audio");
+              audio.srcObject = remoteStream;
+              audio.play();
+            });
+          })
+          .catch((err) => {
+            console.error("Failed to get local stream", err);
+          });
+      });
+    }
+
+    const stopAudioButton = document.getElementById("stop-audio-button");
+    if (stopAudioButton) {
+      stopAudioButton.addEventListener("click", () => {
+        if (localStream) {
+          localStream.getTracks().forEach((track) => track.stop());
+          localStream = null;
+          console.log("Audio transmission stopped");
+        }
       });
     }
 
@@ -175,6 +226,13 @@ function App() {
         <label htmlFor="message">Message:</label>
         <input type="text" id="message" />
         <button id="send-button">Send</button>
+      </div>
+      <div>
+        <label>Audio:</label>
+      </div>
+      <div>
+        <button id="start-audio-button">Start Audio</button>
+        <button id="stop-audio-button">Stop Audio</button>
       </div>
       <div>
         <label htmlFor="log">Log:</label>
