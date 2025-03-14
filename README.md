@@ -9,6 +9,7 @@
 - [x] text chat works
 - [x] custom peer id's
 - [ ] connectivity still not 100%
+    - [x] credentialed turn servers with 500MB free use (one connection used 3KB)
 
 ### next steps:
 
