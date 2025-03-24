@@ -165,7 +165,7 @@ function App() {
           .then((stream) => {
             const audioContext = new AudioContext();
             const gainNode = audioContext.createGain();
-            gainNode.gain.value = 0.001;
+            gainNode.gain.value = 0.01;
             const source = audioContext.createMediaStreamSource(stream);
             source.connect(gainNode);
 
