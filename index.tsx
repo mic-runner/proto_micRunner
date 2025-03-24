@@ -163,18 +163,46 @@ function App() {
         navigator.mediaDevices
           .getUserMedia({ audio: true })
           .then((stream) => {
-            localStream = stream;
-            const call = peer.call(connectId, stream);
+            const audioContext = new AudioContext();
+            const gainNode = audioContext.createGain();
+            gainNode.gain.value = 0.5;
+            const source = audioContext.createMediaStreamSource(stream);
+            source.connect(gainNode);
+
+            const destination = audioContext.createMediaStreamDestination();
+            gainNode.connect(destination);
+
+            localStream = destination.stream;
+
+            const call = peer.call(connectId, localStream);
             call.on("stream", (remoteStream) => {
-              const audio = document.createElement("audio");
-              audio.srcObject = remoteStream;
-              audio.play();
+              applyBandpassFilter(remoteStream);
+              //const audio = document.createElement("audio");
+              //audio.srcObject = remoteStream;
+              //audio.play();
             });
           })
           .catch((err) => {
             console.error("Failed to get local stream", err);
           });
       });
+    }
+
+    function applyBandpassFilter(remoteStream: MediaStream) {
+      const audioContext = new AudioContext();
+      const source = audioContext.createMediaStreamSource(remoteStream);
+    
+      // Create a bandpass filter
+      const filter = audioContext.createBiquadFilter();
+      filter.type = "bandpass";
+      filter.frequency.value = 500; // Center frequency (e.g., 1kHz)
+      filter.Q.value = 4; // Quality factor (adjust for width of the band)
+    
+      source.connect(filter);
+    
+      // Connect to the output (speakers)
+      const destination = audioContext.destination;
+      filter.connect(destination);
     }
 
     const stopAudioButton = document.getElementById("stop-audio-button");
