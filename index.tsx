@@ -165,7 +165,7 @@ function App() {
           .then((stream) => {
             const audioContext = new AudioContext();
             const gainNode = audioContext.createGain();
-            gainNode.gain.value = 0.5;
+            gainNode.gain.value = 0.1;
             const source = audioContext.createMediaStreamSource(stream);
             source.connect(gainNode);
 
@@ -195,7 +195,7 @@ function App() {
       // Create a bandpass filter
       const filter = audioContext.createBiquadFilter();
       filter.type = "bandpass";
-      filter.frequency.value = 500; // Center frequency (e.g., 1kHz)
+      filter.frequency.value = 2000; // Center frequency (e.g., 1kHz)
       filter.Q.value = 4; // Quality factor (adjust for width of the band)
     
       source.connect(filter);
