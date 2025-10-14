@@ -10,12 +10,9 @@
 - [x] custom peer id's
 - [ ] connectivity still not 100%
     - [x] credentialed turn servers with 500MB free use (one connection used 3KB)
-
-### next steps:
-
-- [ ] make connectivity reliable!
-- [ ] audio transmission
-    - [ ] explore audio quality
+- [x] make connectivity reliable!
+- [x] audio transmission
+    - [x] explore audio quality
     - [ ] feedback issues????
     - [ ] see Charles's github issue
 
