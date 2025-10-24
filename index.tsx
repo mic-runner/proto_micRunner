@@ -3,6 +3,11 @@ import { createRoot } from "react-dom/client";
 import Peer, { DataConnection, MediaConnection } from "peerjs";
 import "./styles.css";
 
+// Validate required environment variables
+if (!import.meta.env.VITE_TURN_USERNAME || !import.meta.env.VITE_TURN_CREDENTIAL) {
+  console.warn("TURN server credentials not configured. WebRTC connections may fail in restrictive network environments.");
+}
+
 const iceConfig = {
   iceServers: [
     { urls: "stun:stun.l.google.com:19302" }, // Primary STUN
