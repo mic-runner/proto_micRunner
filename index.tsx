@@ -11,23 +11,23 @@ const iceConfig = {
     },
     {
       urls: "turn:global.relay.metered.ca:80", //TURNs with credentials
-      username: "e3ad760fe887d9e08a94e18f",
-      credential: "S4dcWSoVsJ/CSU1x",
+      username: import.meta.env.VITE_TURN_USERNAME,
+      credential: import.meta.env.VITE_TURN_CREDENTIAL,
     },
     {
       urls: "turn:global.relay.metered.ca:80?transport=tcp",
-      username: "e3ad760fe887d9e08a94e18f",
-      credential: "S4dcWSoVsJ/CSU1x",
+      username: import.meta.env.VITE_TURN_USERNAME,
+      credential: import.meta.env.VITE_TURN_CREDENTIAL,
     },
     {
       urls: "turn:global.relay.metered.ca:443",
-      username: "e3ad760fe887d9e08a94e18f",
-      credential: "S4dcWSoVsJ/CSU1x",
+      username: import.meta.env.VITE_TURN_USERNAME,
+      credential: import.meta.env.VITE_TURN_CREDENTIAL,
     },
     {
       urls: "turns:global.relay.metered.ca:443?transport=tcp",
-      username: "e3ad760fe887d9e08a94e18f",
-      credential: "S4dcWSoVsJ/CSU1x",
+      username: import.meta.env.VITE_TURN_USERNAME,
+      credential: import.meta.env.VITE_TURN_CREDENTIAL,
     },
   ],
 };

@@ -26,6 +26,9 @@ jobs:
           printf '{"version": "%s" }' "$version" > public/version.json
 
       - name: Build
+        env:
+          VITE_TURN_USERNAME: ${{ secrets.VITE_TURN_USERNAME }}
+          VITE_TURN_CREDENTIAL: ${{ secrets.VITE_TURN_CREDENTIAL }}
         run: |
           npm ci && npm run build
           cp dist/index.html dist/404.html
